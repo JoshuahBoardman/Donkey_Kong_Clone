@@ -6,10 +6,11 @@ public class CharacterControler : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 5;
     [SerializeField] float jumpPower = 5;
-
     [SerializeField] Transform groundCheck;
-    [SerializeField] bool isGrounded;
+    [SerializeField] Transform groundCheckR;
+    [SerializeField] Transform groundCheckL;
 
+    private bool isGrounded; 
     private Rigidbody2D myRigidbody;
 
     void Start()
@@ -20,7 +21,9 @@ public class CharacterControler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground")))
+        if(Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground")) ||
+            Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground"))||
+            Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground")))
         {
             isGrounded = true;
         }
