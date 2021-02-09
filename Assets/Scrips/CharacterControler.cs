@@ -14,29 +14,36 @@ public class CharacterControler : MonoBehaviour
     [SerializeField] Transform groundCheckL;
 
     [SerializeField] Transform ladderCheck;
-    [SerializeField] Transform ladderCheckR;
-    [SerializeField] Transform ladderCheckL;
+    [SerializeField] Transform ladderCheckB;
+
+    [SerializeField] Transform triggerCheck;
+
 
     private bool isGrounded;
     private bool isLadder;
+    private bool isTrigger;
     private Rigidbody2D myRigidbody;
+    private BoxCollider2D myBoxColider;
 
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
-
+        myBoxColider = GetComponent<BoxCollider2D>();
     }
 
     private void FixedUpdate()
     {
-        GrounDetectiond();
+        GrounDetection();
         LadderDetection();
+        TriggerDetection();
         HorizontalMovement();
         Jump();
         ClimbLadder();
+        DescendLadder();
+
     }
 
-    private void GrounDetectiond()
+    private void GrounDetection()
     {
         if (Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground")) ||
                     Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground")) ||
@@ -50,9 +57,11 @@ public class CharacterControler : MonoBehaviour
         }
     }
 
+
     private void LadderDetection()
     {
-        if (Physics2D.Linecast(transform.position, ladderCheck.position, 1 << LayerMask.NameToLayer("Ladder")))
+        if (Physics2D.Linecast(transform.position, ladderCheck.position, 1 << LayerMask.NameToLayer("Ladder"))||
+            Physics2D.Linecast(transform.position, ladderCheckB.position, 1 << LayerMask.NameToLayer("Ladder")))
         {
             isLadder = true;
         }
@@ -61,7 +70,17 @@ public class CharacterControler : MonoBehaviour
             isLadder = false;
         }
     }
-    
+    private void TriggerDetection()
+    {
+        if (Physics2D.Linecast(transform.position, triggerCheck.position, 1 << LayerMask.NameToLayer("Trigger")))
+        {
+            isTrigger = true;
+        }
+        else
+        {
+            isTrigger = false;
+        }
+    }
 
     private void HorizontalMovement()
     {
@@ -95,6 +114,21 @@ public class CharacterControler : MonoBehaviour
         }                                                    
         else
         {
+            myRigidbody.gravityScale = 1;
+        }
+    }
+
+    private void DescendLadder()
+    {
+        if (Input.GetKey("s") && isLadder && isTrigger || Input.GetKey("down") && isLadder && isTrigger)
+        {
+            myBoxColider.isTrigger = true;
+            myRigidbody.velocity = new Vector2(0, -cimbingSpeed);
+            myRigidbody.gravityScale = 0;
+        }
+        else
+        {
+            myBoxColider.isTrigger = false;
             myRigidbody.gravityScale = 1;
         }
     }

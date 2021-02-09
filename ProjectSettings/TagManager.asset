@@ -3,19 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Down
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - Trigger
   - Enemy
   - Ground
   - Ladder
-  - 
+  - BrokenLadder
   - 
   - 
   - 
