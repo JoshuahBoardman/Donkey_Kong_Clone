@@ -609,7 +609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &454748358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1975,6 +1975,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 293584678}
     m_Modifications:
+    - target: {fileID: 2100750652, guid: 31ae827b04027b548ac87d63da9777a5, type: 3}
+      propertyPath: m_UseColliderMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100750652, guid: 31ae827b04027b548ac87d63da9777a5, type: 3}
+      propertyPath: m_ColliderMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 9097696947500689105, guid: 31ae827b04027b548ac87d63da9777a5, type: 3}
       propertyPath: m_Name
       value: Floor (3)
@@ -2419,17 +2427,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1197785492, guid: 14227da46eb34a149b4b37e373a78921, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1
+    - target: {fileID: 1100945012, guid: 14227da46eb34a149b4b37e373a78921, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 1197785492, guid: 14227da46eb34a149b4b37e373a78921, type: 3}
-      propertyPath: m_LocalPosition.y
+      propertyPath: m_LocalPosition.x
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 310148091820545810, guid: 14227da46eb34a149b4b37e373a78921, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2663998554217145051, guid: 14227da46eb34a149b4b37e373a78921, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 6794517853698992662, guid: 14227da46eb34a149b4b37e373a78921, type: 3}
       propertyPath: m_RootOrder
@@ -2475,21 +2487,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6983438081157301086, guid: 14227da46eb34a149b4b37e373a78921, type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6983438081157301086, guid: 14227da46eb34a149b4b37e373a78921, type: 3}
-      propertyPath: turnRate
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8581699830357816521, guid: 14227da46eb34a149b4b37e373a78921, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8581699830357816521, guid: 14227da46eb34a149b4b37e373a78921, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14227da46eb34a149b4b37e373a78921, type: 3}
@@ -2812,7 +2812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7911476753471488071, guid: 7ca0260d97cfd0b4ba3b854570059597, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.52
+      value: 4.627
       objectReference: {fileID: 0}
     - target: {fileID: 7911476753471488071, guid: 7ca0260d97cfd0b4ba3b854570059597, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2861,16 +2861,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 293584678}
     m_Modifications:
     - target: {fileID: 2100750652, guid: 31ae827b04027b548ac87d63da9777a5, type: 3}
-      propertyPath: m_UseOneWay
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2100750652, guid: 31ae827b04027b548ac87d63da9777a5, type: 3}
-      propertyPath: m_UseOneWayGrouping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2100750652, guid: 31ae827b04027b548ac87d63da9777a5, type: 3}
       propertyPath: m_ColliderMask.m_Bits
-      value: 4294967295
+      value: 1919
       objectReference: {fileID: 0}
     - target: {fileID: 9097696947500689105, guid: 31ae827b04027b548ac87d63da9777a5, type: 3}
       propertyPath: m_Name

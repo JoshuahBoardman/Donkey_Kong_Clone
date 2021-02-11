@@ -8,63 +8,140 @@ public class Enemy : MonoBehaviour
     [SerializeField] float climbSpeed = 5f;
     [SerializeField] float turnRate = 5f;
 
-    [SerializeField] private Transform groundCheckR;
-    [SerializeField] private Transform groundCheckL;
+    [SerializeField] private Transform ledgeCheckR;
+    [SerializeField] private Transform ledgeCheckL;
+    [SerializeField] private Transform ladderCheck;
+    [SerializeField] private Transform ladderCheckB;
+    [SerializeField] private Transform groundCheck;
 
-    private int randomNumber;
+    private int climbChance;
+    private int turnChance;
 
-    private bool isGrounded;
+    private bool isLedge;
+    private bool isLadder;
+    [SerializeField] private bool isGrounded;
     private bool moveRight;
 
     private Rigidbody2D rigidbody;
+    private BoxCollider2D boxCollider;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        InvokeRepeating("Patrol", 0f, turnRate);
+        boxCollider = GetComponent<BoxCollider2D>();
+        InvokeRepeating("TurnChance", 0f, turnRate);
+        InvokeRepeating("ClimbChance", 0f, 1f);
+        InvokeRepeating("Patrol", 0f, 1f);
     }
 
     private void FixedUpdate()
     {
-        GrounDetection();
+        GroundDetection();
+        LedgeDetection();
+        LadderDetection();
+
         LedgeSave();
+        ClimbLadder();
     }
 
-    void Patrol()
+    private void Patrol()
     {
-        randomNumber = Random.Range(1, 10);
-        Debug.Log(randomNumber);
-
-        if (randomNumber % 2f == 0)
+        if (isGrounded)
         {
-            rigidbody.velocity = new Vector2(speed, rigidbody.velocity.y);
-            moveRight = true;
-        }
-        else
-        {
-            rigidbody.velocity = new Vector2(-speed, rigidbody.velocity.y);
-            moveRight = false;
-        }
-
-    }
-    private void LedgeSave()
-    {
-        if (!isGrounded)
-        {
-            if(moveRight == false)
-            rigidbody.velocity = new Vector2(speed, rigidbody.velocity.y);
+            if (turnChance % 2f == 0)
+            {
+                rigidbody.velocity = new Vector2(speed, rigidbody.velocity.y);
+                moveRight = true;
+            }
             else
             {
                 rigidbody.velocity = new Vector2(-speed, rigidbody.velocity.y);
+                moveRight = false;
             }
-        
         }
     }
 
-    private void GrounDetection()
+    private void ClimbLadder()
     {
-        if (Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground")) && 
-            Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground")))
+
+        if (isLadder)
+        {
+            if(climbChance % 4 == 0 || isGrounded == false)
+            {
+                rigidbody.velocity = new Vector2(0,  climbSpeed);
+                boxCollider.isTrigger = true;
+            }
+            else
+            {
+                rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
+                boxCollider.isTrigger = false;
+                rigidbody.gravityScale = 0;
+            }
+        }
+        else
+        {
+            boxCollider.isTrigger = false;
+            rigidbody.gravityScale = 1;
+        }
+    }
+
+    private void LedgeSave() // pervents enemy from running of the ledge.
+    {
+        if (isLedge == true && !isLadder)
+        {
+            if (moveRight == false)
+            {
+                rigidbody.velocity = new Vector2(speed, rigidbody.velocity.y);
+            }
+            if (moveRight == true)
+            {
+                rigidbody.velocity = new Vector2(-speed, rigidbody.velocity.y);
+            }
+        }
+
+    }
+
+    private void TurnChance()
+    {
+        turnChance = Random.Range(1, 10);
+    }
+
+    private void ClimbChance()
+    {
+        climbChance = Random.Range(1, 10);
+    }
+
+    private void LedgeDetection()
+    {
+        if (Physics2D.Linecast(transform.position, ledgeCheckR.position, 1 << LayerMask.NameToLayer("Ground")) && 
+            Physics2D.Linecast(transform.position, ledgeCheckL.position, 1 << LayerMask.NameToLayer("Ground")))
+        {
+            isLedge = false;
+        }
+        else
+        {
+            isLedge = true;
+        }
+    }
+
+    private void LadderDetection()
+    {
+        if (Physics2D.Linecast(transform.position, ladderCheck.position, 1 << LayerMask.NameToLayer("BrokenLadder")) ||
+           Physics2D.Linecast(transform.position, ladderCheck.position, 1 << LayerMask.NameToLayer("Ladder")) ||
+           Physics2D.Linecast(transform.position, ladderCheckB.position, 1 << LayerMask.NameToLayer("BrokenLadder"))||
+           Physics2D.Linecast(transform.position, ladderCheckB.position, 1 << LayerMask.NameToLayer("Ladder")))
+        {
+            isLadder = true;
+        }
+        else
+        {
+            isLadder = false;
+        }
+    }
+
+    private void GroundDetection()
+    {
+        if (Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground")))
         {
             isGrounded = true;
         }
@@ -72,5 +149,6 @@ public class Enemy : MonoBehaviour
         {
             isGrounded = false;
         }
+
     }
 }

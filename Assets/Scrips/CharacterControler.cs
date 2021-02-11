@@ -7,7 +7,7 @@ public class CharacterControler : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 5;
     [SerializeField] float jumpPower = 5;
-    [SerializeField] float cimbingSpeed = 3;
+    [SerializeField] float climbingSpeed = 3;
 
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform groundCheckR;
@@ -17,7 +17,6 @@ public class CharacterControler : MonoBehaviour
     [SerializeField] Transform ladderCheckB;
 
     [SerializeField] Transform triggerCheck;
-
 
     private bool isGrounded;
     private bool isLadder;
@@ -109,7 +108,7 @@ public class CharacterControler : MonoBehaviour
     {
         if (Input.GetKey("w") && isLadder || Input.GetKey("up") && isLadder)
         {
-            myRigidbody.velocity = new Vector2(0, cimbingSpeed);
+            myRigidbody.velocity = new Vector2(0, climbingSpeed);
             myRigidbody.gravityScale = 0;
         }                                                    
         else
@@ -123,7 +122,7 @@ public class CharacterControler : MonoBehaviour
         if (Input.GetKey("s") && isLadder && isTrigger || Input.GetKey("down") && isLadder && isTrigger)
         {
             myBoxColider.isTrigger = true;
-            myRigidbody.velocity = new Vector2(0, -cimbingSpeed);
+            myRigidbody.velocity = new Vector2(0, -climbingSpeed);
             myRigidbody.gravityScale = 0;
         }
         else
