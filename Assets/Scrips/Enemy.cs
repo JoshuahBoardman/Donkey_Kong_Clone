@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float turnRate = 5f;
 
     [SerializeField] private Transform ledgeCheckR;
-    [SerializeField] private Transform ledgeCheckL;
+    [SerializeField] private Transform wallCheckR;
     [SerializeField] private Transform ladderCheck;
     [SerializeField] private Transform ladderCheckB;
     [SerializeField] private Transform groundCheck;
@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
 
     private bool isLedge;
     private bool isLadder;
+    private bool isWall;
     [SerializeField] private bool isGrounded;
     private bool moveRight;
 
@@ -31,7 +32,6 @@ public class Enemy : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         InvokeRepeating("TurnChance", 0f, turnRate);
         InvokeRepeating("ClimbChance", 0f, 1f);
-        InvokeRepeating("Patrol", 0f, 1f);
     }
 
     private void FixedUpdate()
@@ -39,8 +39,9 @@ public class Enemy : MonoBehaviour
         GroundDetection();
         LedgeDetection();
         LadderDetection();
-
-        LedgeSave();
+        WallDetection();
+        LedgeAndWallSave();
+        Patrol();
         ClimbLadder();
     }
 
@@ -50,11 +51,13 @@ public class Enemy : MonoBehaviour
         {
             if (turnChance % 2f == 0)
             {
+                transform.eulerAngles = new Vector3(0, 0, 0);
                 rigidbody.velocity = new Vector2(speed, rigidbody.velocity.y);
                 moveRight = true;
             }
             else
             {
+                transform.eulerAngles = new Vector3(0, 180, 0);
                 rigidbody.velocity = new Vector2(-speed, rigidbody.velocity.y);
                 moveRight = false;
             }
@@ -85,17 +88,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void LedgeSave() // pervents enemy from running of the ledge.
+    private void LedgeAndWallSave() // pervents enemy from running of the ledge or running into a wall.
     {
-        if (isLedge == true && !isLadder)
+        if (isLedge == true && !isLadder || isWall && !isLadder)
         {
             if (moveRight == false)
             {
-                rigidbody.velocity = new Vector2(speed, rigidbody.velocity.y);
+                turnChance = 2;
             }
             if (moveRight == true)
             {
-                rigidbody.velocity = new Vector2(-speed, rigidbody.velocity.y);
+                turnChance = 3;
             }
         }
 
@@ -113,14 +116,25 @@ public class Enemy : MonoBehaviour
 
     private void LedgeDetection()
     {
-        if (Physics2D.Linecast(transform.position, ledgeCheckR.position, 1 << LayerMask.NameToLayer("Ground")) && 
-            Physics2D.Linecast(transform.position, ledgeCheckL.position, 1 << LayerMask.NameToLayer("Ground")))
+        if (Physics2D.Linecast(transform.position, ledgeCheckR.position, 1 << LayerMask.NameToLayer("Ground")))
         {
             isLedge = false;
         }
         else
         {
             isLedge = true;
+        }
+    }
+
+    private void WallDetection()
+    {
+        if (Physics2D.Linecast(transform.position, wallCheckR.position, 1 << LayerMask.NameToLayer("Wall")))
+        {
+            isWall = true;
+        }
+        else
+        {
+            isWall = false;
         }
     }
 
