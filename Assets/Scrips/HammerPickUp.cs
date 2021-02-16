@@ -17,12 +17,14 @@ public class HammerPickUp : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.layer == 3)
         {
-            isPlayer = true;
-            Destroy(other);
+
+            Destroy(gameObject);
         }
     }
+
+
 }
