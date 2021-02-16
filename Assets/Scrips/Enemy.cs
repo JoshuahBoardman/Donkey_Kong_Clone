@@ -7,20 +7,23 @@ public class Enemy : MonoBehaviour
     [SerializeField] float speed = 5f;
     [SerializeField] float climbSpeed = 5f;
     [SerializeField] float turnRate = 5f;
+    [SerializeField] float detectionDistance = 5f;
 
-    [SerializeField] private Transform ledgeCheckR;
-    [SerializeField] private Transform wallCheckR;
+    [SerializeField] private Transform ledgeCheck;
+    [SerializeField] private Transform wallCheck;
     [SerializeField] private Transform ladderCheck;
     [SerializeField] private Transform ladderCheckB;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform playerCheck;
 
     private int climbChance;
     private int turnChance;
 
+    private bool isPlayer;
     private bool isLedge;
     private bool isLadder;
     private bool isWall;
-    [SerializeField] private bool isGrounded;
+    private bool isGrounded;
     private bool moveRight;
 
     private Rigidbody2D rigidbody;
@@ -40,8 +43,10 @@ public class Enemy : MonoBehaviour
         LedgeDetection();
         LadderDetection();
         WallDetection();
+        PlayerDetection();
         LedgeAndWallSave();
         Patrol();
+        RunTowardsPlayer();
         ClimbLadder();
     }
 
@@ -69,7 +74,7 @@ public class Enemy : MonoBehaviour
 
         if (isLadder)
         {
-            if(climbChance % 4 == 0 || isGrounded == false)
+            if(climbChance % 4 == 0)
             {
                 rigidbody.velocity = new Vector2(0,  climbSpeed);
                 boxCollider.isTrigger = true;
@@ -85,6 +90,18 @@ public class Enemy : MonoBehaviour
         {
             boxCollider.isTrigger = false;
             rigidbody.gravityScale = 1;
+        }
+    }
+
+    private void RunTowardsPlayer()
+    {
+        if (isPlayer)
+        {
+            speed = 5f;
+        }
+        else
+        {
+            speed = 2f;
         }
     }
 
@@ -114,9 +131,21 @@ public class Enemy : MonoBehaviour
         climbChance = Random.Range(1, 10);
     }
 
+    private void PlayerDetection()
+    {
+        if (Physics2D.Linecast(transform.position, playerCheck.position, 1 << LayerMask.NameToLayer("Player")))
+        {
+            isPlayer = true;
+        }
+        else
+        {
+            isPlayer = false;
+        }
+    }
+
     private void LedgeDetection()
     {
-        if (Physics2D.Linecast(transform.position, ledgeCheckR.position, 1 << LayerMask.NameToLayer("Ground")))
+        if (Physics2D.Linecast(transform.position, ledgeCheck.position, 1 << LayerMask.NameToLayer("Ground")))
         {
             isLedge = false;
         }
@@ -128,7 +157,7 @@ public class Enemy : MonoBehaviour
 
     private void WallDetection()
     {
-        if (Physics2D.Linecast(transform.position, wallCheckR.position, 1 << LayerMask.NameToLayer("Wall")))
+        if (Physics2D.Linecast(transform.position, wallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
         {
             isWall = true;
         }

@@ -7,10 +7,15 @@ public class BarrelSpawner : MonoBehaviour
 
     [SerializeField] Barrel barrel;
     [SerializeField] Transform barrelParentTransform;
-    [SerializeField] float secondsBetweenSpawns = 2;
+
+    [SerializeField] int minSpawnRate = 4;
+    [SerializeField] int maxSpawnRate = 7;
+
+    private float secondsBetweenSpawns;
 
     void Start()
     {
+        InvokeRepeating("SpawnChance", 0f, 1f);
         StartCoroutine(SpawnBarrels());
     }
 
@@ -22,5 +27,10 @@ public class BarrelSpawner : MonoBehaviour
             yield return new WaitForSeconds(secondsBetweenSpawns);
             newBarrel.transform.parent = barrelParentTransform;
         }
+    }
+
+    private void SpawnChance()
+    {
+        secondsBetweenSpawns = Random.Range(minSpawnRate, maxSpawnRate);
     }
 }

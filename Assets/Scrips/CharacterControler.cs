@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class CharacterControler : MonoBehaviour
 {
-    [SerializeField] float movementSpeed = 5;
-    [SerializeField] float jumpPower = 5;
-    [SerializeField] float climbingSpeed = 3;
 
     [SerializeField] Transform groundCheck;
     [SerializeField] Transform groundCheckR;
     [SerializeField] Transform groundCheckL;
-
     [SerializeField] Transform ladderCheck;
     [SerializeField] Transform ladderCheckB;
-
     [SerializeField] Transform triggerCheck;
+
+    [SerializeField] float movementSpeed = 5;
+    [SerializeField] float jumpPower = 5;
+    [SerializeField] float climbingSpeed = 3;
 
     private bool isGrounded;
     private bool isLadder;
     private bool isTrigger;
+
     private Rigidbody2D myRigidbody;
     private BoxCollider2D myBoxColider;
 
@@ -56,7 +56,6 @@ public class CharacterControler : MonoBehaviour
         }
     }
 
-
     private void LadderDetection()
     {
         if (Physics2D.Linecast(transform.position, ladderCheck.position, 1 << LayerMask.NameToLayer("Ladder"))||
@@ -69,6 +68,7 @@ public class CharacterControler : MonoBehaviour
             isLadder = false;
         }
     }
+
     private void TriggerDetection()
     {
         if (Physics2D.Linecast(transform.position, triggerCheck.position, 1 << LayerMask.NameToLayer("Trigger")))
@@ -131,4 +131,5 @@ public class CharacterControler : MonoBehaviour
             myRigidbody.gravityScale = 1;
         }
     }
+
 }
