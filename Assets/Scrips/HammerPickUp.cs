@@ -4,24 +4,20 @@ using UnityEngine;
 
 public class HammerPickUp : MonoBehaviour
 {
-    [SerializeField] private Transform hammerHitbox;
+    [SerializeField] private GameObject hammerHitbox;
+    [SerializeField] private Hammer hammer;
 
-    [SerializeField] bool isPlayer = false;
 
     private void Start()
     {
-        
-    }
-    private void Update()
-    {
-        
-    }
 
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == 3)
         {
-
+            hammerHitbox.SetActive(true);
+            hammer.HammerBuffDuration();
             Destroy(gameObject);
         }
     }

@@ -39,56 +39,18 @@ public class CharacterControler : MonoBehaviour
         Jump();
         ClimbLadder();
         DescendLadder();
-
-    }
-
-    private void GrounDetection()
-    {
-        if (Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground")) ||
-                    Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground")) ||
-                    Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground")))
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
-    }
-
-    private void LadderDetection()
-    {
-        if (Physics2D.Linecast(transform.position, ladderCheck.position, 1 << LayerMask.NameToLayer("Ladder"))||
-            Physics2D.Linecast(transform.position, ladderCheckB.position, 1 << LayerMask.NameToLayer("Ladder")))
-        {
-            isLadder = true;
-        }
-        else
-        {
-            isLadder = false;
-        }
-    }
-
-    private void TriggerDetection()
-    {
-        if (Physics2D.Linecast(transform.position, triggerCheck.position, 1 << LayerMask.NameToLayer("Trigger")))
-        {
-            isTrigger = true;
-        }
-        else
-        {
-            isTrigger = false;
-        }
     }
 
     private void HorizontalMovement()
     {
         if (Input.GetKey("d") || Input.GetKey("right"))
         {
+            transform.eulerAngles = new Vector3(0, 0, 0);
             myRigidbody.velocity = new Vector2(movementSpeed, myRigidbody.velocity.y);
         }
         else if (Input.GetKey("a") || Input.GetKey("left"))
         {
+            transform.eulerAngles = new Vector3(0, 180, 0);
             myRigidbody.velocity = new Vector2(-movementSpeed, myRigidbody.velocity.y);
         }
         else
@@ -104,6 +66,7 @@ public class CharacterControler : MonoBehaviour
             myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpPower);
         }
     }
+
     private void ClimbLadder()
     {
         if (Input.GetKey("w") && isLadder || Input.GetKey("up") && isLadder)
@@ -132,4 +95,42 @@ public class CharacterControler : MonoBehaviour
         }
     }
 
+    private void GrounDetection()
+    {
+        if (Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground")) ||
+                    Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground")) ||
+                    Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground")))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
+    }
+
+    private void LadderDetection()
+    {
+        if (Physics2D.Linecast(transform.position, ladderCheck.position, 1 << LayerMask.NameToLayer("Ladder")) ||
+            Physics2D.Linecast(transform.position, ladderCheckB.position, 1 << LayerMask.NameToLayer("Ladder")))
+        {
+            isLadder = true;
+        }
+        else
+        {
+            isLadder = false;
+        }
+    }
+
+    private void TriggerDetection()
+    {
+        if (Physics2D.Linecast(transform.position, triggerCheck.position, 1 << LayerMask.NameToLayer("Trigger")))
+        {
+            isTrigger = true;
+        }
+        else
+        {
+            isTrigger = false;
+        }
+    }
 }

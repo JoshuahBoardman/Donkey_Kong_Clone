@@ -70,9 +70,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 0.2735849, g: 0.24648452, b: 0.24648452, a: 1}
+  m_Color: {r: 0.6132076, g: 0.2053667, b: 0.2053667, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -109,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 7630147387946434679}
   m_LocalRotation: {x: 0, y: 0, z: 0.41227773, w: 0.91105825}
   m_LocalPosition: {x: -9.69, y: 5.93, z: -34.43521}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 1}
   m_Children:
   - {fileID: 3398752295184921599}
   - {fileID: 4166239170303273091}
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerHitbox: {fileID: 0}
+  hammer: {fileID: 0}
 --- !u!1 &8577254386748397566
 GameObject:
   m_ObjectHideFlags: 0

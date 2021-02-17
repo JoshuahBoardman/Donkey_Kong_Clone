@@ -21,9 +21,9 @@ public class EnemySpawner : MonoBehaviour
         while (true) //forever
         {
             yield return new WaitForSeconds(firstSpawnDelay);
-            var newBarrel = Instantiate(enemy, transform.position, Quaternion.identity);
+            Instantiate(enemy, enemyParentTransform.position, Quaternion.identity);
             yield return new WaitForSeconds(secondsBetweenSpawns);
-            newBarrel.transform.parent = enemyParentTransform;
+            //newEnemy.transform.parent = enemyParentTransform;
         }
     }
 }

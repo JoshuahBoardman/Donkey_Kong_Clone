@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
         LadderDetection();
         WallDetection();
         PlayerDetection();
-        LedgeAndWallSave();
+        LedgeAndWallProtection();
         Patrol();
         RunTowardsPlayer();
         ClimbLadder();
@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void LedgeAndWallSave() // pervents enemy from running of the ledge or running into a wall.
+    private void LedgeAndWallProtection() // pervents enemy from running of the ledge or running into a wall.
     {
         if (isLedge == true && !isLadder || isWall && !isLadder)
         {
