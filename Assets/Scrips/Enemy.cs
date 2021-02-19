@@ -44,6 +44,7 @@ public class Enemy : MonoBehaviour
         LadderDetection();
         WallDetection();
         PlayerDetection();
+        EnemyCollision();
         LedgeAndWallProtection();
         Patrol();
         RunTowardsPlayer();
@@ -129,6 +130,11 @@ public class Enemy : MonoBehaviour
     private void ClimbChance()
     {
         climbChance = Random.Range(1, 10);
+    }
+
+    private void EnemyCollision()
+    {
+        Physics2D.IgnoreLayerCollision(7, 7, true);
     }
 
     private void PlayerDetection()
