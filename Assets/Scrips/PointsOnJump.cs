@@ -14,7 +14,7 @@ public class PointsOnJump : MonoBehaviour
     {
         if (other.gameObject.layer == 7)
         {
-            if (character.isGrounded == false)
+            if (character.isGrounded == false && character.isLadder == false)
             {
                 score.AddPoints(pointsAwarded);
             }

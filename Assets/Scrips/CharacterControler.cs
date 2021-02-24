@@ -18,8 +18,8 @@ public class CharacterControler : MonoBehaviour
     [SerializeField] float climbingSpeed = 3;
 
     public bool isGrounded;
+    public bool isLadder;
 
-    private bool isLadder;
     private bool isTrigger;
 
     private Rigidbody2D myRigidbody;
