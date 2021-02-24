@@ -7,6 +7,10 @@ public class Hammer : MonoBehaviour
 
     [SerializeField] private float hammerBuffDuration = 10f;
 
+    private int pointsAwardedOnKill = 300;
+
+    [SerializeField] Score score;
+
     private void Start()
     {
         gameObject.SetActive(false);
@@ -16,6 +20,7 @@ public class Hammer : MonoBehaviour
     {
         if (other.gameObject.layer == 7)
         {
+            score.AddPoints(pointsAwardedOnKill);
             Destroy(other.gameObject);
         }
     }

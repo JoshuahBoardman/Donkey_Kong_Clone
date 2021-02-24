@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] float speed = 5f;
     [SerializeField] float climbSpeed = 5f;
     [SerializeField] float turnRate = 5f;
-    [SerializeField] float detectionDistance = 5f;
 
     [SerializeField] private Transform ledgeCheck;
     [SerializeField] private Transform wallCheck;

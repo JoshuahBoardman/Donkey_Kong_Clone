@@ -5,5 +5,4 @@ using UnityEngine;
 public class PlayerAttributes : MonoBehaviour
 {
     public int health = 3;
-    public int points = 0;
 }

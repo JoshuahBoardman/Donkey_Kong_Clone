@@ -203,6 +203,80 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerBuffDuration: 10
+  score: {fileID: 0}
+--- !u!1 &7040313546506290591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6065439394984877825}
+  - component: {fileID: 3967050371461713512}
+  - component: {fileID: 3967937761636518972}
+  m_Layer: 3
+  m_Name: EnemyUnderPlayerDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6065439394984877825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7040313546506290591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.027, z: 0}
+  m_LocalScale: {x: 1.25, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7911476753471488071}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3967050371461713512
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7040313546506290591}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &3967937761636518972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7040313546506290591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbefb7cbe5170e146850b746c5969e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsAwarded: 100
+  score: {fileID: 0}
+  character: {fileID: 7911476753471488067}
 --- !u!1 &7911476752654879749
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,6 +320,8 @@ GameObject:
   - component: {fileID: 7911476753471488069}
   - component: {fileID: 7911476753471488066}
   - component: {fileID: 7911476753471488067}
+  - component: {fileID: 1825142169}
+  - component: {fileID: 1825142174}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -271,6 +347,7 @@ Transform:
   - {fileID: 1730760069}
   - {fileID: 680853765}
   - {fileID: 7191626391480896744}
+  - {fileID: 6065439394984877825}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -393,6 +470,32 @@ MonoBehaviour:
   movementSpeed: 2
   jumpPower: 5
   climbingSpeed: 3
+  isGrounded: 0
+--- !u!114 &1825142169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7911476753471488064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f03f7da3ba2d3343bad538aa0e9aac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1825142174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7911476753471488064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5e265966c57034e8ea34920ee06515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
 --- !u!1 &7911476753524840581
 GameObject:
   m_ObjectHideFlags: 0

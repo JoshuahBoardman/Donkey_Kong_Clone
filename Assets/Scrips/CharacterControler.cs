@@ -17,12 +17,14 @@ public class CharacterControler : MonoBehaviour
     [SerializeField] float jumpPower = 5;
     [SerializeField] float climbingSpeed = 3;
 
-    private bool isGrounded;
+    public bool isGrounded;
+
     private bool isLadder;
     private bool isTrigger;
 
     private Rigidbody2D myRigidbody;
     private BoxCollider2D myBoxColider;
+    
 
     void Start()
     {
