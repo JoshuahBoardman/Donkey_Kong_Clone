@@ -24,19 +24,22 @@ public class CharacterControler : MonoBehaviour
 
     private Rigidbody2D myRigidbody;
     private BoxCollider2D myBoxColider;
-    
 
-    void Start()
+    private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myBoxColider = GetComponent<BoxCollider2D>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         GrounDetection();
         LadderDetection();
         TriggerDetection();
+    }
+
+    private void FixedUpdate()
+    {
         HorizontalMovement();
         Jump();
         ClimbLadder();

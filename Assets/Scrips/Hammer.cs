@@ -11,7 +11,7 @@ public class Hammer : MonoBehaviour
 
     [SerializeField] Score score;
 
-    private void Start()
+    private void Awake()
     {
         gameObject.SetActive(false);
     }

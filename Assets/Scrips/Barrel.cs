@@ -14,13 +14,16 @@ public class Barrel : MonoBehaviour
 
     private Rigidbody2D rigidbody;
 
-    void Start()
+    private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+    }
+    void Start()
+    {
         SpawnMovement();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         WallDetection();
         DirectionChange();

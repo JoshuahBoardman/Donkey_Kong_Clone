@@ -7,7 +7,7 @@ public class PlayerCollision : MonoBehaviour
 {
     private PlayerAttributes attributes;
 
-    private void Start()
+    private void Awake()
     {
         attributes = GetComponent<PlayerAttributes>();
     }

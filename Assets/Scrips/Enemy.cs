@@ -28,15 +28,18 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rigidbody;
     private BoxCollider2D boxCollider;
 
-    void Start()
+    private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+    }
+    void Start()
+    {
         InvokeRepeating("TurnChance", 0f, turnRate);
         InvokeRepeating("ClimbChance", 0f, 1f);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         GroundDetection();
         LedgeDetection();
@@ -45,6 +48,10 @@ public class Enemy : MonoBehaviour
         PlayerDetection();
         EnemyCollision();
         LedgeAndWallProtection();
+    }
+
+    private void FixedUpdate()
+    {
         Patrol();
         RunTowardsPlayer();
         ClimbLadder();
@@ -72,7 +79,7 @@ public class Enemy : MonoBehaviour
     private void ClimbLadder()
     {
 
-        if (isLadder)
+        if (isLadder && !isPlayer)
         {
             if(climbChance % 4 == 0)
             {
