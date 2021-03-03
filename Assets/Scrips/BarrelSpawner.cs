@@ -13,6 +13,11 @@ public class BarrelSpawner : MonoBehaviour
 
     private float secondsBetweenSpawns;
 
+    private void Awake()
+    {
+        secondsBetweenSpawns = 4;
+    }
+
     void Start()
     {
         InvokeRepeating("SpawnChance", 0f, 1f);
@@ -24,8 +29,9 @@ public class BarrelSpawner : MonoBehaviour
         while (true) //forever
         {
             var newBarrel = Instantiate(barrel, transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(secondsBetweenSpawns);
             newBarrel.transform.parent = barrelParentTransform;
+            yield return new WaitForSeconds(secondsBetweenSpawns);
+            
         }
     }
 

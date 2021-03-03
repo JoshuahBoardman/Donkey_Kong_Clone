@@ -8,30 +8,20 @@ public class Enemy : MonoBehaviour
     [SerializeField] float climbSpeed = 5f;
     [SerializeField] float turnRate = 5f;
 
-    [SerializeField] private Transform ledgeCheck;
-    [SerializeField] private Transform wallCheck;
-    [SerializeField] private Transform ladderCheck;
-    [SerializeField] private Transform ladderCheckB;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform playerCheck;
-
     private int climbChance;
     private int turnChance;
 
-    private bool isPlayer;
-    private bool isLedge;
-    private bool isLadder;
-    private bool isWall;
-    private bool isGrounded;
     private bool moveRight;
 
     private Rigidbody2D rigidbody;
     private BoxCollider2D boxCollider;
+    private Detection myDetection;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        myDetection = GetComponent<Detection>();
     }
     void Start()
     {
@@ -41,17 +31,12 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        GroundDetection();
-        LedgeDetection();
-        LadderDetection();
-        WallDetection();
-        PlayerDetection();
         EnemyCollision();
-        LedgeAndWallProtection();
     }
 
     private void FixedUpdate()
     {
+        LedgeAndWallProtection();
         Patrol();
         RunTowardsPlayer();
         ClimbLadder();
@@ -59,7 +44,7 @@ public class Enemy : MonoBehaviour
 
     private void Patrol()
     {
-        if (isGrounded)
+        if (myDetection.isGrounded)
         {
             if (turnChance % 2f == 0)
             {
@@ -79,7 +64,7 @@ public class Enemy : MonoBehaviour
     private void ClimbLadder()
     {
 
-        if (isLadder && !isPlayer)
+        if (myDetection.isLadder && !myDetection.isPlayer)
         {
             if(climbChance % 4 == 0)
             {
@@ -102,9 +87,9 @@ public class Enemy : MonoBehaviour
 
     private void RunTowardsPlayer()
     {
-        if (isPlayer)
+        if (myDetection.isPlayer)
         {
-            speed = 5f;
+            speed = 4f;
         }
         else
         {
@@ -114,7 +99,7 @@ public class Enemy : MonoBehaviour
 
     private void LedgeAndWallProtection() // pervents enemy from running of the ledge or running into a wall.
     {
-        if (isLedge == true && !isLadder || isWall && !isLadder)
+        if (myDetection.isLedge == true && !myDetection.isLadder || myDetection.isWall && !myDetection.isLadder)
         {
             if (moveRight == false)
             {
@@ -141,69 +126,5 @@ public class Enemy : MonoBehaviour
     private void EnemyCollision()
     {
         Physics2D.IgnoreLayerCollision(7, 7, true);
-    }
-
-    private void PlayerDetection()
-    {
-        if (Physics2D.Linecast(transform.position, playerCheck.position, 1 << LayerMask.NameToLayer("Player")))
-        {
-            isPlayer = true;
-        }
-        else
-        {
-            isPlayer = false;
-        }
-    }
-
-    private void LedgeDetection()
-    {
-        if (Physics2D.Linecast(transform.position, ledgeCheck.position, 1 << LayerMask.NameToLayer("Ground")))
-        {
-            isLedge = false;
-        }
-        else
-        {
-            isLedge = true;
-        }
-    }
-
-    private void WallDetection()
-    {
-        if (Physics2D.Linecast(transform.position, wallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
-        {
-            isWall = true;
-        }
-        else
-        {
-            isWall = false;
-        }
-    }
-
-    private void LadderDetection()
-    {
-        if (Physics2D.Linecast(transform.position, ladderCheck.position, 1 << LayerMask.NameToLayer("BrokenLadder")) ||
-           Physics2D.Linecast(transform.position, ladderCheck.position, 1 << LayerMask.NameToLayer("Ladder")) ||
-           Physics2D.Linecast(transform.position, ladderCheckB.position, 1 << LayerMask.NameToLayer("BrokenLadder"))||
-           Physics2D.Linecast(transform.position, ladderCheckB.position, 1 << LayerMask.NameToLayer("Ladder")))
-        {
-            isLadder = true;
-        }
-        else
-        {
-            isLadder = false;
-        }
-    }
-
-    private void GroundDetection()
-    {
-        if (Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground")))
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
-
     }
 }

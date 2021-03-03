@@ -5,27 +5,25 @@ using UnityEngine;
 public class Barrel : MonoBehaviour
 {
     
-    [SerializeField] float barreltSpeed = 2;
+    [SerializeField] private float barreltSpeed = 2;
 
-    [SerializeField] private Transform wallCheck;
-
-    private bool isWall;
     private bool moveRight;
 
     private Rigidbody2D rigidbody;
+    private Detection myDetection;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        myDetection = GetComponent<Detection>();
     }
     void Start()
     {
         SpawnMovement();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        WallDetection();
         DirectionChange();
     }
 
@@ -35,8 +33,8 @@ public class Barrel : MonoBehaviour
         rigidbody.velocity = new Vector2(barreltSpeed, rigidbody.velocity.y);
     }
     private void DirectionChange()
-    {
-        if (isWall)
+    {     
+        if (myDetection.isWall)
         {
             if (moveRight)
             {
@@ -52,18 +50,4 @@ public class Barrel : MonoBehaviour
             }
         }
     }
-
-    private void WallDetection()
-    {
-        if (Physics2D.Linecast(transform.position, wallCheck.position, 1 << LayerMask.NameToLayer("Wall")))
-        {
-            isWall = true;
-        }
-        else
-        {
-            isWall = false;
-        }
-    }
-
-
 }

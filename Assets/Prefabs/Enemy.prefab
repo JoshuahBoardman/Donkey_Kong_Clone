@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6778629767413207445}
   - component: {fileID: 1007445020917907770}
   - component: {fileID: 6983438081157301086}
+  - component: {fileID: 7616421990326009097}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -183,12 +184,30 @@ MonoBehaviour:
   speed: 2
   climbSpeed: 3
   turnRate: 3.5
-  detectionDistance: 5
-  ledgeCheck: {fileID: 8581699830357816521}
-  wallCheck: {fileID: 3657651743659798256}
+--- !u!114 &7616421990326009097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310148091820545810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316d7216cd2648249936da7cbe0d0755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrounded: 0
+  isLadder: 0
+  isWall: 0
+  isTrigger: 0
+  isLedge: 0
+  isPlayer: 0
+  groundCheck: {fileID: 2663998554217145051}
   ladderCheck: {fileID: 5626111825546158810}
   ladderCheckB: {fileID: 1100945012}
-  groundCheck: {fileID: 2663998554217145051}
+  wallCheck: {fileID: 3657651743659798256}
+  triggerCheck: {fileID: 6794517853698992662}
+  ledgeCheck: {fileID: 8581699830357816521}
   playerCheck: {fileID: 7831629036478389867}
 --- !u!1 &612063003998906666
 GameObject:

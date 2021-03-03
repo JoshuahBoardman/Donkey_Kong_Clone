@@ -7,14 +7,14 @@ public class PointsOnJump : MonoBehaviour
     [SerializeField] int pointsAwarded = 100;
 
     [SerializeField] Score score;
-    [SerializeField] CharacterControler character;
+    [SerializeField] Detection characterDetection;
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == 7)
         {
-            if (character.isGrounded == false && character.isLadder == false)
+            if (characterDetection.isGrounded == false && characterDetection.isLadder == false)
             {
                 score.AddPoints(pointsAwarded);
             }

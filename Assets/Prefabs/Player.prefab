@@ -276,7 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsAwarded: 100
   score: {fileID: 0}
-  character: {fileID: 7911476753471488067}
+  characterDetection: {fileID: 1736153380}
 --- !u!1 &7911476752654879749
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +322,7 @@ GameObject:
   - component: {fileID: 7911476753471488067}
   - component: {fileID: 1825142169}
   - component: {fileID: 1825142174}
+  - component: {fileID: 1736153380}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -461,16 +462,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b029aa9be4d66b74e8ed68e2b7c44c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheck: {fileID: 7911476752654879748}
-  groundCheckR: {fileID: 7911476754278855495}
-  groundCheckL: {fileID: 7911476753524840580}
-  ladderCheck: {fileID: 7065193295873637858}
-  ladderCheckB: {fileID: 1730760069}
-  triggerCheck: {fileID: 680853765}
   movementSpeed: 2
   jumpPower: 5
   climbingSpeed: 3
-  isGrounded: 0
 --- !u!114 &1825142169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,6 +490,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+--- !u!114 &1736153380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7911476753471488064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316d7216cd2648249936da7cbe0d0755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrounded: 0
+  isLadder: 0
+  isWall: 0
+  isTrigger: 0
+  isLedge: 0
+  isPlayer: 0
+  groundCheck: {fileID: 7911476752654879748}
+  ladderCheck: {fileID: 7065193295873637858}
+  ladderCheckB: {fileID: 1730760069}
+  wallCheck: {fileID: 7911476753471488071}
+  triggerCheck: {fileID: 680853765}
+  ledgeCheck: {fileID: 7911476753471488071}
+  playerCheck: {fileID: 7911476753471488071}
 --- !u!1 &7911476753524840581
 GameObject:
   m_ObjectHideFlags: 0

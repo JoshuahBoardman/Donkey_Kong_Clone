@@ -6,36 +6,19 @@ using UnityEngine;
 public class CharacterControler : MonoBehaviour
 {
 
-    [SerializeField] Transform groundCheck;
-    [SerializeField] Transform groundCheckR;
-    [SerializeField] Transform groundCheckL;
-    [SerializeField] Transform ladderCheck;
-    [SerializeField] Transform ladderCheckB;
-    [SerializeField] Transform triggerCheck;
-
     [SerializeField] float movementSpeed = 5;
     [SerializeField] float jumpPower = 5;
     [SerializeField] float climbingSpeed = 3;
 
-    public bool isGrounded;
-    public bool isLadder;
-
-    private bool isTrigger;
-
     private Rigidbody2D myRigidbody;
     private BoxCollider2D myBoxColider;
+    private Detection myDetection;
 
     private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myBoxColider = GetComponent<BoxCollider2D>();
-    }
-
-    private void Update()
-    {
-        GrounDetection();
-        LadderDetection();
-        TriggerDetection();
+        myDetection = GetComponent<Detection>();
     }
 
     private void FixedUpdate()
@@ -48,25 +31,28 @@ public class CharacterControler : MonoBehaviour
 
     private void HorizontalMovement()
     {
-        if (Input.GetKey("d") || Input.GetKey("right"))
+        if (myDetection.isGrounded)
         {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-            myRigidbody.velocity = new Vector2(movementSpeed, myRigidbody.velocity.y);
-        }
-        else if (Input.GetKey("a") || Input.GetKey("left"))
-        {
-            transform.eulerAngles = new Vector3(0, 180, 0);
-            myRigidbody.velocity = new Vector2(-movementSpeed, myRigidbody.velocity.y);
-        }
-        else
-        {
-            myRigidbody.velocity = new Vector2(0, myRigidbody.velocity.y);
+            if (Input.GetKey("d") || Input.GetKey("right"))
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                myRigidbody.velocity = new Vector2(movementSpeed, myRigidbody.velocity.y);
+            }
+            else if (Input.GetKey("a") || Input.GetKey("left"))
+            {
+                transform.eulerAngles = new Vector3(0, 180, 0);
+                myRigidbody.velocity = new Vector2(-movementSpeed, myRigidbody.velocity.y);
+            }
+            else
+            {
+                myRigidbody.velocity = new Vector2(0, myRigidbody.velocity.y);
+            }
         }
     }
 
     private void Jump()
     {
-        if (Input.GetKey("space") && isGrounded)
+        if (Input.GetKey("space") && myDetection.isGrounded)
         {
             myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpPower);
         }
@@ -74,7 +60,8 @@ public class CharacterControler : MonoBehaviour
 
     private void ClimbLadder()
     {
-        if (Input.GetKey("w") && isLadder || Input.GetKey("up") && isLadder)
+
+        if (Input.GetKey("w") && myDetection.isLadder || Input.GetKey("up") && myDetection.isLadder)
         {
             myRigidbody.velocity = new Vector2(0, climbingSpeed);
             myRigidbody.gravityScale = 0;
@@ -87,7 +74,8 @@ public class CharacterControler : MonoBehaviour
 
     private void DescendLadder()
     {
-        if (Input.GetKey("s") && isLadder && isTrigger || Input.GetKey("down") && isLadder && isTrigger)
+        if (Input.GetKey("s") && myDetection.isTrigger && myDetection.isTrigger ||
+            Input.GetKey("down") && myDetection.isTrigger && myDetection.isTrigger)
         {
             myBoxColider.isTrigger = true;
             myRigidbody.velocity = new Vector2(0, -climbingSpeed);
@@ -97,45 +85,6 @@ public class CharacterControler : MonoBehaviour
         {
             myBoxColider.isTrigger = false;
             myRigidbody.gravityScale = 1;
-        }
-    }
-
-    private void GrounDetection()
-    {
-        if (Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground")) ||
-                    Physics2D.Linecast(transform.position, groundCheckR.position, 1 << LayerMask.NameToLayer("Ground")) ||
-                    Physics2D.Linecast(transform.position, groundCheckL.position, 1 << LayerMask.NameToLayer("Ground")))
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
-    }
-
-    private void LadderDetection()
-    {
-        if (Physics2D.Linecast(transform.position, ladderCheck.position, 1 << LayerMask.NameToLayer("Ladder")) ||
-            Physics2D.Linecast(transform.position, ladderCheckB.position, 1 << LayerMask.NameToLayer("Ladder")))
-        {
-            isLadder = true;
-        }
-        else
-        {
-            isLadder = false;
-        }
-    }
-
-    private void TriggerDetection()
-    {
-        if (Physics2D.Linecast(transform.position, triggerCheck.position, 1 << LayerMask.NameToLayer("Trigger")))
-        {
-            isTrigger = true;
-        }
-        else
-        {
-            isTrigger = false;
         }
     }
 }
