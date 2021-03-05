@@ -26,4 +26,12 @@ public class EnemySpawner : MonoBehaviour
             //newEnemy.transform.parent = enemyParentTransform;
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "FireBarrel")
+        {
+            Destroy(collision.gameObject);
+            Instantiate(enemy, enemyParentTransform.position, Quaternion.identity);
+        }
+    }
 }

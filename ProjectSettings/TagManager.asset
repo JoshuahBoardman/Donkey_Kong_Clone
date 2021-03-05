@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Down
+  - FireBarrel
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Ladder
   - BrokenLadder
   - Wall
-  - 
+  - BrokenLadderTrigger
   - 
   - 
   - 

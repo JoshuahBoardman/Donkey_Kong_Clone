@@ -18,7 +18,12 @@ public class Hammer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 7)
+        if (other.gameObject.tag == "FireBarrel")
+        {
+            score.AddPoints(pointsAwardedOnKill * 2);
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.layer == 7)
         {
             score.AddPoints(pointsAwardedOnKill);
             Destroy(other.gameObject);

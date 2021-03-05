@@ -110,7 +110,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
   m_Color: {r: 1, g: 0.58659756, b: 0, a: 1}
   m_FlipX: 0
@@ -200,6 +200,7 @@ MonoBehaviour:
   isLadder: 0
   isWall: 0
   isTrigger: 0
+  isbrokenLadderTrigger: 0
   isLedge: 0
   isPlayer: 0
   groundCheck: {fileID: 2663998554217145051}
@@ -207,6 +208,7 @@ MonoBehaviour:
   ladderCheckB: {fileID: 1100945012}
   wallCheck: {fileID: 3657651743659798256}
   triggerCheck: {fileID: 6794517853698992662}
+  brokenLadderTriggerCheck: {fileID: 6794517853698992662}
   ledgeCheck: {fileID: 8581699830357816521}
   playerCheck: {fileID: 7831629036478389867}
 --- !u!1 &612063003998906666

@@ -18,11 +18,16 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.layer == 7)
         {
             Destroy(collision.gameObject);
-            attributes.health--;
-            if (health <= 1)
-            {
-                GameOver();
-            }
+            TakeDamage(health);
+        }
+    }
+
+    private void TakeDamage(int health)
+    {
+        attributes.health--;
+        if (health <= 1)
+        {
+            GameOver();
         }
     }
 

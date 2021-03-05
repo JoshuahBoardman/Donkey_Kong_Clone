@@ -45,8 +45,8 @@ GameObject:
   - component: {fileID: 983226078960405116}
   - component: {fileID: 5758740639119956523}
   m_Layer: 7
-  m_Name: Barrel
-  m_TagString: Untagged
+  m_Name: FireBarrel
+  m_TagString: FireBarrel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  m_Color: {r: 0.4528302, g: 0.28119296, b: 0.11320755, a: 1}
+  m_Color: {r: 0.15432537, g: 0.6415094, b: 0.5395406, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

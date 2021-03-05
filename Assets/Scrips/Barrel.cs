@@ -5,9 +5,13 @@ using UnityEngine;
 public class Barrel : MonoBehaviour
 {
     
-    [SerializeField] private float barreltSpeed = 2;
+    public float barreltSpeed = 2;
 
-    private bool moveRight;
+    public bool moveRight;
+
+    private int earlyExitChance;
+
+    private bool wallsDisabled;
 
     private Rigidbody2D rigidbody;
     private Detection myDetection;
@@ -20,11 +24,26 @@ public class Barrel : MonoBehaviour
     void Start()
     {
         SpawnMovement();
+        InvokeRepeating("EarlyExitChance", 0f, 1f);
     }
 
     private void FixedUpdate()
     {
         DirectionChange();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(earlyExitChance % 3 == 0)
+        {
+            Physics2D.IgnoreLayerCollision(11, 7, true);
+            wallsDisabled = true;
+        }
+        else
+        {
+            Physics2D.IgnoreLayerCollision(11, 7, false);
+            wallsDisabled = false;
+        }
     }
 
     private void SpawnMovement()
@@ -34,7 +53,7 @@ public class Barrel : MonoBehaviour
     }
     private void DirectionChange()
     {     
-        if (myDetection.isWall)
+        if (myDetection.isWall && !wallsDisabled)
         {
             if (moveRight)
             {
@@ -50,4 +69,22 @@ public class Barrel : MonoBehaviour
             }
         }
     }
+
+    private void EarlyExitChance()
+    {
+        earlyExitChance = Random.Range(1, 10);
+    }
+
+    public void SetMoveRight()
+    {
+        moveRight = true;
+        transform.eulerAngles = new Vector3(0, 0, 0);
+    }
+
+    public void SetMoveLeft()
+    {
+        moveRight = false;
+        transform.eulerAngles = new Vector3(0, 180, 0);
+    }
+
 }

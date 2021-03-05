@@ -74,8 +74,8 @@ public class CharacterControler : MonoBehaviour
 
     private void DescendLadder()
     {
-        if (Input.GetKey("s") && myDetection.isTrigger && myDetection.isTrigger ||
-            Input.GetKey("down") && myDetection.isTrigger && myDetection.isTrigger)
+        if (Input.GetKey("s") && myDetection.isTrigger && myDetection.isLadder ||
+            Input.GetKey("down") && myDetection.isTrigger && myDetection.isLadder)
         {
             myBoxColider.isTrigger = true;
             myRigidbody.velocity = new Vector2(0, -climbingSpeed);

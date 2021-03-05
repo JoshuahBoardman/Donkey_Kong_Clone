@@ -9,6 +9,7 @@ public class Detection : MonoBehaviour
     public bool isLadder;
     public bool isWall;
     public bool isTrigger;
+    public bool isbrokenLadderTrigger;
     public bool isLedge;
     public bool isPlayer;
 
@@ -18,6 +19,7 @@ public class Detection : MonoBehaviour
     [SerializeField] private Transform ladderCheckB;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private Transform triggerCheck;
+    [SerializeField] private Transform brokenLadderTriggerCheck;
     [SerializeField] private Transform ledgeCheck;
     [SerializeField] private Transform playerCheck;
 
@@ -78,6 +80,17 @@ public class Detection : MonoBehaviour
         else
         {
             isTrigger = false;
+        }
+    }
+    private void BrokenLadderTriggerdetection()
+    {
+        if (Physics2D.Linecast(transform.position, brokenLadderTriggerCheck.position, 1 << LayerMask.NameToLayer("BrokenLadderTrigger")))
+        {
+            isbrokenLadderTrigger = true;
+        }
+        else
+        {
+            isbrokenLadderTrigger = false;
         }
     }
     private void LedgeDetection()
