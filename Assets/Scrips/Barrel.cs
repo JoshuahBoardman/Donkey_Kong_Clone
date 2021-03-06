@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Barrel : MonoBehaviour
 {
+    public Vector2 speedOfBarrel;
     
     public float barreltSpeed = 2;
 
@@ -21,15 +22,17 @@ public class Barrel : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         myDetection = GetComponent<Detection>();
     }
+    
     void Start()
     {
-        SpawnMovement();
         InvokeRepeating("EarlyExitChance", 0f, 1f);
     }
 
     private void FixedUpdate()
     {
+        speedOfBarrel = rigidbody.velocity;
         DirectionChange();
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -46,10 +49,10 @@ public class Barrel : MonoBehaviour
         }
     }
 
-    private void SpawnMovement()
+    public void SpawnMovement()
     {
         moveRight = true;
-        rigidbody.velocity = new Vector2(barreltSpeed, rigidbody.velocity.y);
+        rigidbody.velocity = transform.right * 2 ; //new Vector2(rigidbody.velocity.x + barreltSpeed, rigidbody.velocity.y) * Time.deltaTime;
     }
     private void DirectionChange()
     {     
@@ -58,13 +61,13 @@ public class Barrel : MonoBehaviour
             if (moveRight)
             {
                 transform.eulerAngles = new Vector3(0, 180, 0);
-                rigidbody.velocity = new Vector2(-barreltSpeed, rigidbody.velocity.y);
+                rigidbody.velocity = new Vector2(-barreltSpeed, rigidbody.velocity.y) * Time.deltaTime;
                 moveRight = false;
             }
             else if (!moveRight)
             {
                 transform.eulerAngles = new Vector3(0, 0, 0);
-                rigidbody.velocity = new Vector2(barreltSpeed, rigidbody.velocity.y);
+                rigidbody.velocity = new Vector2(barreltSpeed, rigidbody.velocity.y) * Time.deltaTime;
                 moveRight = true;
             }
         }

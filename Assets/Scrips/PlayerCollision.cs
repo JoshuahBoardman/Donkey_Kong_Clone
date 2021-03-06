@@ -22,6 +22,16 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var health = attributes.health;
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(collision.gameObject);
+            TakeDamage(health);
+        }
+    }
+
     private void TakeDamage(int health)
     {
         attributes.health--;

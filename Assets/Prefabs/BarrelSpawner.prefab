@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barrel: {fileID: 983226078960405116, guid: d40e5f1b35c3aa743814c8b4cc5f8f72, type: 3}
-  ladderBarrel: {fileID: -502586884267123146, guid: 4388c318ae6d1754f9310c642fc7d6de, type: 3}
+  fireBarrel: {fileID: 983226078960405116, guid: 2829c98924cb7fb44ba09afe15d9e898, type: 3}
+  ladderBarrel: {fileID: 983226078960405116, guid: 4388c318ae6d1754f9310c642fc7d6de, type: 3}
   barrelParentTransform: {fileID: 6800187081342510447}
-  minSpawnRate: 4
+  minSpawnRate: 3
   maxSpawnRate: 7

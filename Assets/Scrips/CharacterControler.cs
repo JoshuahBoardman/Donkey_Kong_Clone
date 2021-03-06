@@ -36,16 +36,16 @@ public class CharacterControler : MonoBehaviour
             if (Input.GetKey("d") || Input.GetKey("right"))
             {
                 transform.eulerAngles = new Vector3(0, 0, 0);
-                myRigidbody.velocity = new Vector2(movementSpeed, myRigidbody.velocity.y);
+                myRigidbody.velocity = new Vector2(movementSpeed, myRigidbody.velocity.y) * Time.deltaTime;
             }
             else if (Input.GetKey("a") || Input.GetKey("left"))
             {
                 transform.eulerAngles = new Vector3(0, 180, 0);
-                myRigidbody.velocity = new Vector2(-movementSpeed, myRigidbody.velocity.y);
+                myRigidbody.velocity = new Vector2(-movementSpeed, myRigidbody.velocity.y) * Time.deltaTime;
             }
             else
             {
-                myRigidbody.velocity = new Vector2(0, myRigidbody.velocity.y);
+                myRigidbody.velocity = new Vector2(0, myRigidbody.velocity.y) * Time.deltaTime;
             }
         }
     }
@@ -54,7 +54,7 @@ public class CharacterControler : MonoBehaviour
     {
         if (Input.GetKey("space") && myDetection.isGrounded)
         {
-            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpPower);
+            myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, jumpPower) * Time.deltaTime;
         }
     }
 
@@ -63,7 +63,7 @@ public class CharacterControler : MonoBehaviour
 
         if (Input.GetKey("w") && myDetection.isLadder || Input.GetKey("up") && myDetection.isLadder)
         {
-            myRigidbody.velocity = new Vector2(0, climbingSpeed);
+            myRigidbody.velocity = new Vector2(0, climbingSpeed) * Time.deltaTime;
             myRigidbody.gravityScale = 0;
         }                                                    
         else
@@ -78,7 +78,7 @@ public class CharacterControler : MonoBehaviour
             Input.GetKey("down") && myDetection.isTrigger && myDetection.isLadder)
         {
             myBoxColider.isTrigger = true;
-            myRigidbody.velocity = new Vector2(0, -climbingSpeed);
+            myRigidbody.velocity = new Vector2(0, -climbingSpeed) * Time.deltaTime;
             myRigidbody.gravityScale = 0;
         }
         else

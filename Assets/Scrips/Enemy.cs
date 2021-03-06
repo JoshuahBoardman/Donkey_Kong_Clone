@@ -8,8 +8,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] float climbSpeed = 5f;
     [SerializeField] float turnRate = 5f;
 
+    private float originalSpeed;
+
     private int climbChance;
     private int turnChance;
+    
 
     private bool moveRight;
 
@@ -22,6 +25,7 @@ public class Enemy : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         myDetection = GetComponent<Detection>();
+        originalSpeed = speed;
     }
     void Start()
     {
@@ -49,13 +53,13 @@ public class Enemy : MonoBehaviour
             if (turnChance % 2f == 0)
             {
                 transform.eulerAngles = new Vector3(0, 0, 0);
-                rigidbody.velocity = new Vector2(speed, rigidbody.velocity.y);
+                rigidbody.velocity = new Vector2(speed, rigidbody.velocity.y) * Time.deltaTime;
                 moveRight = true;
             }
             else
             {
                 transform.eulerAngles = new Vector3(0, 180, 0);
-                rigidbody.velocity = new Vector2(-speed, rigidbody.velocity.y);
+                rigidbody.velocity = new Vector2(-speed, rigidbody.velocity.y) * Time.deltaTime;
                 moveRight = false;
             }
         }
@@ -66,14 +70,14 @@ public class Enemy : MonoBehaviour
 
         if (myDetection.isLadder && !myDetection.isPlayer)
         {
-            if(climbChance % 4 == 0)
+            if(climbChance == 4 || climbChance == 8)
             {
-                rigidbody.velocity = new Vector2(0,  climbSpeed);
+                rigidbody.velocity = new Vector2(0,  climbSpeed) * Time.deltaTime;
                 boxCollider.isTrigger = true;
             }
             else
             {
-                rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
+                rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0) * Time.deltaTime;
                 boxCollider.isTrigger = false;
                 rigidbody.gravityScale = 0;
             }
@@ -89,11 +93,11 @@ public class Enemy : MonoBehaviour
     {
         if (myDetection.isPlayer)
         {
-            speed = 4f;
+            speed += (speed* .8f) * Time.deltaTime;
         }
-        else
+        else 
         {
-            speed = 2f;
+            speed = originalSpeed;
         }
     }
 

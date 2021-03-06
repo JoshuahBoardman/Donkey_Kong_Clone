@@ -6,9 +6,6 @@ public class BarrelLadderMovement : MonoBehaviour
 {
 
     private int descendLadderChance;
-    private int secondsBetweenDescending = 5;
-
-    private bool dropDownLadder;
 
     private Rigidbody2D myRigidbody;
     private CircleCollider2D myCollider;
@@ -39,11 +36,11 @@ public class BarrelLadderMovement : MonoBehaviour
         {
             if (myBarrel.moveRight )
             {
-                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x + (myBarrel.barreltSpeed/2), myRigidbody.velocity.y);
+                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x + (myBarrel.barreltSpeed * .75f), myRigidbody.velocity.y) * Time.deltaTime;
             }
             else
             {
-                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x + (-myBarrel.barreltSpeed/2), myRigidbody.velocity.y);
+                myRigidbody.velocity = new Vector2(myRigidbody.velocity.x + (-myBarrel.barreltSpeed * .75f), myRigidbody.velocity.y) * Time.deltaTime;
             }
         }
     }
@@ -55,20 +52,23 @@ public class BarrelLadderMovement : MonoBehaviour
             if (descendLadderChance == 7 && myBarrel.moveRight ||
                 descendLadderChance == 4 && myBarrel.moveRight)
             {
+                this.gameObject.tag = "Enemy";
                 myCollider.isTrigger = true;
-                myRigidbody.velocity = new Vector2(0, myRigidbody.velocity.y);
+                myRigidbody.velocity = new Vector2(0, myRigidbody.velocity.y) * Time.deltaTime;
                 myBarrel.SetMoveLeft();
             }
             else if (descendLadderChance == 6 && myBarrel.moveRight == false ||
-                descendLadderChance == 3 && myBarrel.moveRight == false)
+                     descendLadderChance == 3 && myBarrel.moveRight == false)
             {
+                this.gameObject.tag = "Enemy";
                 myCollider.isTrigger = true;
-                myRigidbody.velocity = new Vector2(0, myRigidbody.velocity.y);
+                myRigidbody.velocity = new Vector2(0, myRigidbody.velocity.y) * Time.deltaTime;
                 myBarrel.SetMoveRight();
             }
         }
         else
         {
+            this.gameObject.tag = "Untagged";
             myCollider.isTrigger = false;
             myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y);
         }

@@ -166,7 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01498efc6129f584782fa0980b575835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barreltSpeed: 2
+  speedOfBarrel: {x: 0, y: 0}
+  barreltSpeed: 120
   moveRight: 0
 --- !u!114 &5758740639119956523
 MonoBehaviour:

@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 9150324833983842925}
   - component: {fileID: 983226078960405116}
   - component: {fileID: 5758740639119956523}
+  - component: {fileID: -5301395848990631714}
   m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
@@ -166,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01498efc6129f584782fa0980b575835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barreltSpeed: 2
+  barreltSpeed: 120
   moveRight: 0
 --- !u!114 &5758740639119956523
 MonoBehaviour:
@@ -195,3 +196,15 @@ MonoBehaviour:
   brokenLadderTriggerCheck: {fileID: 5360633085234302946}
   ledgeCheck: {fileID: 5360633085234302946}
   playerCheck: {fileID: 5360633085234302946}
+--- !u!114 &-5301395848990631714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916438847533247876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8b4794d5702d2439342c8773e5e85d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

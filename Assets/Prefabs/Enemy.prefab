@@ -181,8 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41fce6f5218632c468e67f3cafbbca78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  climbSpeed: 3
+  speed: 120
+  climbSpeed: 150
   turnRate: 3.5
 --- !u!114 &7616421990326009097
 MonoBehaviour:

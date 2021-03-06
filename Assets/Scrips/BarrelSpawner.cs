@@ -7,7 +7,7 @@ public class BarrelSpawner : MonoBehaviour
 
     [SerializeField] Barrel barrel;
     [SerializeField] Barrel fireBarrel;
-    [SerializeField] BarrelLadderMovement ladderBarrel;
+    [SerializeField] Barrel ladderBarrel;
     [SerializeField] Transform barrelParentTransform;
 
     [SerializeField] int minSpawnRate = 2;
@@ -33,20 +33,23 @@ public class BarrelSpawner : MonoBehaviour
     {
         while (true) //forever
         {
-            if(typeOfBarrelSpawnChance % 5 == 0)
+            if(typeOfBarrelSpawnChance == 6 || typeOfBarrelSpawnChance == 8)
             {
                 var newLadderBarrel = Instantiate(ladderBarrel, transform.position, Quaternion.identity);
                 newLadderBarrel.transform.parent = barrelParentTransform;
+                newLadderBarrel.SpawnMovement();
             }
             else if(typeOfBarrelSpawnChance == 9)
             {
                 var newFireBarrel = Instantiate(fireBarrel, transform.position, Quaternion.identity);
                 newFireBarrel.transform.parent = barrelParentTransform;
+                newFireBarrel.SpawnMovement();
             }
             else
             {
                 var newBarrel = Instantiate(barrel, transform.position, Quaternion.identity);
                 newBarrel.transform.parent = barrelParentTransform;
+                newBarrel.SpawnMovement();
             }
             yield return new WaitForSeconds(secondsBetweenSpawns);
             
