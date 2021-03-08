@@ -43,6 +43,6 @@ public class PlayerCollision : MonoBehaviour
 
     private void GameOver() 
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
     }
 }
